@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: webserver
+  namespace: staging
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: ./charts/nginx
+      version: "1.16.2"
+      sourceRef:
+        kind: GitRepository
+        name: static-webserver
+        namespace: flux-system
+      interval: 1m
+  values:
+    ingress:
+      enabled: "true"
+      hosts:
+        - host: webserver.opsplusplus.local
+          paths:
+            - /
