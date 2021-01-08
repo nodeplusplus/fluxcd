@@ -43,7 +43,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - mountPath: "/usr/share/nginx/html"
-              name: auth-demo
+              name: basic-auth
               readOnly: true
       {{- with .Values.nodeSelector }}
       nodeSelector:
@@ -58,6 +58,6 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
-        - name: auth-demo
+        - name: basic-auth
           secret:
-            secretName: auth-demo
+            secretName: basic-auth
